@@ -15,9 +15,13 @@
 		E2B75EA128E5DC1B008A865D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B75E9F28E5DC1B008A865D /* Main.storyboard */; };
 		E2B75EA328E5DC1D008A865D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B75EA228E5DC1D008A865D /* Assets.xcassets */; };
 		E2B75EA628E5DC1D008A865D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B75EA428E5DC1D008A865D /* LaunchScreen.storyboard */; };
+		E2BF77D128E8131500802A78 /* GameSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF77D028E8131500802A78 /* GameSceneViewModel.swift */; };
+		E2BF77D328E8149B00802A78 /* MoveEnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF77D228E8149B00802A78 /* MoveEnvironmentModel.swift */; };
+		E2BF77D728E81D5700802A78 /* Toriko.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2BF77D628E81D5700802A78 /* Toriko.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E236D11728E81FAA0043DA71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2B75E9228E5DC1B008A865D /* Dino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B75E9528E5DC1B008A865D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B75E9728E5DC1B008A865D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -27,6 +31,9 @@
 		E2B75EA028E5DC1B008A865D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2B75EA228E5DC1D008A865D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2B75EA528E5DC1D008A865D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E2BF77D028E8131500802A78 /* GameSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewModel.swift; sourceTree = "<group>"; };
+		E2BF77D228E8149B00802A78 /* MoveEnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveEnvironmentModel.swift; sourceTree = "<group>"; };
+		E2BF77D628E81D5700802A78 /* Toriko.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Toriko.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +47,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E236D11A28E828850043DA71 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E2B75EA228E5DC1D008A865D /* Assets.xcassets */,
+				E2BF77D628E81D5700802A78 /* Toriko.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E236D11B28E8288E0043DA71 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				E2B75E9F28E5DC1B008A865D /* Main.storyboard */,
+				E2B75EA428E5DC1D008A865D /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		E236D11C28E828A40043DA71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2BF77D228E8149B00802A78 /* MoveEnvironmentModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E236D11D28E828BC0043DA71 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				E2B75E9B28E5DC1B008A865D /* GameScene.swift */,
+				E2BF77D028E8131500802A78 /* GameSceneViewModel.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		E236D11E28E828EB0043DA71 /* SpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				E2B75E9728E5DC1B008A865D /* GameScene.sks */,
+				E2B75E9928E5DC1B008A865D /* Actions.sks */,
+			);
+			path = SpriteKit;
+			sourceTree = "<group>";
+		};
+		E236D11F28E828F60043DA71 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E236D11728E81FAA0043DA71 /* Info.plist */,
+				E2B75E9528E5DC1B008A865D /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E236D12028E829140043DA71 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E2B75E9D28E5DC1B008A865D /* GameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E2B75E8928E5DC1B008A865D = {
 			isa = PBXGroup;
 			children = (
@@ -59,14 +127,13 @@
 		E2B75E9428E5DC1B008A865D /* Dino */ = {
 			isa = PBXGroup;
 			children = (
-				E2B75E9528E5DC1B008A865D /* AppDelegate.swift */,
-				E2B75E9728E5DC1B008A865D /* GameScene.sks */,
-				E2B75E9928E5DC1B008A865D /* Actions.sks */,
-				E2B75E9B28E5DC1B008A865D /* GameScene.swift */,
-				E2B75E9D28E5DC1B008A865D /* GameViewController.swift */,
-				E2B75E9F28E5DC1B008A865D /* Main.storyboard */,
-				E2B75EA228E5DC1D008A865D /* Assets.xcassets */,
-				E2B75EA428E5DC1D008A865D /* LaunchScreen.storyboard */,
+				E236D11E28E828EB0043DA71 /* SpriteKit */,
+				E236D11D28E828BC0043DA71 /* GameScene */,
+				E236D12028E829140043DA71 /* ViewControllers */,
+				E236D11C28E828A40043DA71 /* Models */,
+				E236D11B28E8288E0043DA71 /* StoryBoards */,
+				E236D11A28E828850043DA71 /* Resources */,
+				E236D11F28E828F60043DA71 /* Application */,
 			);
 			path = Dino;
 			sourceTree = "<group>";
@@ -129,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BF77D728E81D5700802A78 /* Toriko.ttf in Resources */,
 				E2B75EA128E5DC1B008A865D /* Main.storyboard in Resources */,
 				E2B75E9828E5DC1B008A865D /* GameScene.sks in Resources */,
 				E2B75EA328E5DC1D008A865D /* Assets.xcassets in Resources */,
@@ -144,8 +212,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BF77D128E8131500802A78 /* GameSceneViewModel.swift in Sources */,
 				E2B75E9C28E5DC1B008A865D /* GameScene.swift in Sources */,
 				E2B75E9E28E5DC1B008A865D /* GameViewController.swift in Sources */,
+				E2BF77D328E8149B00802A78 /* MoveEnvironmentModel.swift in Sources */,
 				E2B75E9628E5DC1B008A865D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +292,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -276,6 +348,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -291,12 +365,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYFTVC42WF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dino/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
@@ -319,12 +395,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYFTVC42WF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dino/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
