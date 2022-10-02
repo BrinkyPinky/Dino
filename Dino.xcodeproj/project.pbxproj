@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E213014E28E997430071EC65 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213014D28E997430071EC65 /* DataManager.swift */; };
 		E2B75E9628E5DC1B008A865D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B75E9528E5DC1B008A865D /* AppDelegate.swift */; };
 		E2B75E9828E5DC1B008A865D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B75E9728E5DC1B008A865D /* GameScene.sks */; };
 		E2B75E9A28E5DC1B008A865D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B75E9928E5DC1B008A865D /* Actions.sks */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E213014D28E997430071EC65 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E236D11728E81FAA0043DA71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2B75E9228E5DC1B008A865D /* Dino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B75E9528E5DC1B008A865D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E213014C28E997110071EC65 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E213014D28E997430071EC65 /* DataManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E236D11A28E828850043DA71 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 				E236D11C28E828A40043DA71 /* Models */,
 				E236D11B28E8288E0043DA71 /* StoryBoards */,
 				E236D11A28E828850043DA71 /* Resources */,
+				E213014C28E997110071EC65 /* Services */,
 				E236D11F28E828F60043DA71 /* Application */,
 			);
 			path = Dino;
@@ -213,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2BF77D128E8131500802A78 /* GameSceneViewModel.swift in Sources */,
+				E213014E28E997430071EC65 /* DataManager.swift in Sources */,
 				E2B75E9C28E5DC1B008A865D /* GameScene.swift in Sources */,
 				E2B75E9E28E5DC1B008A865D /* GameViewController.swift in Sources */,
 				E2BF77D328E8149B00802A78 /* MoveEnvironmentModel.swift in Sources */,
@@ -294,6 +306,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -350,6 +363,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -372,10 +386,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dino/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -402,10 +416,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dino/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -20,23 +20,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var dinoNode: SKSpriteNode!
     var slimeNode: SKSpriteNode!
-    var slimeBounceZone: SKSpriteNode!
+    var obstacleSlime: SKSpriteNode!
     
     var scoreLabel = SKLabelNode(text: "0")
     
+    var score: Int = 0
+    
     var referenceTime: Double = 0
+    
+    lazy var obstacles = [obstacleSlime, obstacleStone]
     
     override func didMove(to view: SKView) {
         viewModel = GameSceneViewModel()
         
+        self.addChild(self.scoreLabel)
+        
         obstacleStone = childNode(withName: "obstacleStone") as? SKSpriteNode
         dinoNode = childNode(withName: "dino") as? SKSpriteNode
-        slimeBounceZone = childNode(withName: "slimeBounceZone") as? SKSpriteNode
-        slimeNode = slimeBounceZone.childNode(withName: "slime") as? SKSpriteNode
+        obstacleSlime = childNode(withName: "obstacleSlime") as? SKSpriteNode
+        slimeNode = obstacleSlime.childNode(withName: "slime") as? SKSpriteNode
         playButton = childNode(withName: "playButton") as? SKSpriteNode
         optionsButton = childNode(withName: "optionsButton") as? SKSpriteNode
         
-        slimeBounceZone.physicsBody?.restitution = 2
+        obstacleSlime.physicsBody?.restitution = 2
         
         var slimeIdleTextures: [SKTexture] = []
         for i in 1...2 {
@@ -77,7 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         moveEnvironment()
-        guard !isGamePaused else { return }
+        self.dinoNode.position.x = -(self.scene?.frame.width)!/3
+        guard !isGamePaused else {
+            lastMovementObstacle?.position.x = self.scene!.frame.width/1.5
+            return
+        }
         scoreCounter(currentTime: currentTime)
         moveObstacles()
     }
@@ -86,7 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if referenceTime == 0 {
             referenceTime = currentTime
         } else {
-            scoreLabel.text = "\(lround((currentTime-referenceTime)*5))"
+            score = lround((currentTime-referenceTime)*5)
+            scoreLabel.text = "\(score)"
         }
     }
     
@@ -94,13 +105,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if dinoNode.position.y < -95 {
             dinoNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
         }
-
+        
         guard let touch = touches.first?.location(in: self) else { return }
         
         if playButton.contains(touch) {
             startGame()
         } else if optionsButton.contains(touch) {
             print("settings")
+//            self.view.pre
         }
     }
     
@@ -114,13 +126,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sleep(1)
             self.removeChildren(in: [self.playButton, self.optionsButton])
             self.isGamePaused = false
-            self.addChild(self.scoreLabel)
         }
     }
     
-    // MARK: Game Over
+    // MARK: Contact logic
     
     func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.contactTestBitMask == 2 && contact.bodyB.contactTestBitMask == 1 {
+            var slimeDyingTextures = [SKTexture]()
+            
+            for i in 1...13 {
+                let texture = SKTexture(imageNamed: "slimeDying\(i)")
+                texture.filteringMode = .nearest
+                slimeDyingTextures.append(texture)
+            }
+            
+            let slimeDyingAnimation = SKAction.animate(with: slimeDyingTextures, timePerFrame: 0.1)
+            
+            slimeNode.run(slimeDyingAnimation)
+        }
+        
         guard contact.bodyA.contactTestBitMask == contact.bodyB.contactTestBitMask else { return }
         showMainMenu()
     }
@@ -129,16 +154,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func showMainMenu() {
         isGamePaused = true
-
+        
+        DataManager.shared.saveScore(value: score)
+        scoreLabel.text = "Best score: \(DataManager.shared.fetchScore() ?? 0)"
+        
         referenceTime = 0
         
         playButton.position = CGPoint(x: 0, y: self.scene!.frame.height)
         optionsButton.position = CGPoint(x: 0, y: self.scene!.frame.height/2)
         
+        
         if !self.children.contains(playButton) && !self.children.contains(optionsButton) {
             self.addChild(playButton)
             self.addChild(optionsButton)
-            self.removeChildren(in: [self.scoreLabel])
         }
     }
     
@@ -147,13 +175,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastMovementObstacle: SKSpriteNode!
     
     func moveObstacles() {
-        let sequence = [slimeBounceZone, obstacleStone]
-        
         if lastMovementObstacle == nil {
-            lastMovementObstacle = sequence.randomElement()!!
+            lastMovementObstacle = obstacles.randomElement()!!
         }else if lastMovementObstacle.position.x <= -(scene?.frame.width)!/1.5 {
             lastMovementObstacle.position.x = scene!.frame.width/1.5
-            lastMovementObstacle = sequence.randomElement()!!
+            lastMovementObstacle = obstacles.randomElement()!!
         }
         
         lastMovementObstacle.position.x -= viewModel.movementSpeed

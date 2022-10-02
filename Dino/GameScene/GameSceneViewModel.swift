@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GameSceneViewModelProtocol {
-    var movementSpeed: CGFloat { get }
+    var movementSpeed: CGFloat { get set }
     var environments: [MoveEnvironment] { get }
 }
 
