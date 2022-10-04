@@ -10,28 +10,87 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    // view model
     var viewModel: GameSceneViewModelProtocol!
-    var obstacleStone: SKSpriteNode!
     
-    var playButton: SKSpriteNode!
-    var optionsButton: SKSpriteNode!
-    
+    // game status
     var isGamePaused = true
+    var isDinoBounded = false
     
+    // nodes
     var dinoNode: SKSpriteNode!
     var slimeNode: SKSpriteNode!
     var obstacleSlime: SKSpriteNode!
-    
+    var obstacleStone: SKSpriteNode!
+    var playButton: SKSpriteNode!
+    var optionsButton: SKSpriteNode!
+    var eagleNode: SKSpriteNode!
+
+    // score
     var scoreLabel = SKLabelNode(text: "0")
-    
     var score: Int = 0
-    
     var referenceTime: Double = 0
     
-    lazy var obstacles = [obstacleSlime, obstacleStone]
+    // obstacles array
+    lazy var obstacles = [obstacleSlime, obstacleStone, eagleNode]
+    
+    // texture actions
+    var slimeIdleAnimation: SKAction!
+    var dinoRunningAnimation: SKAction!
+    var bendedDinoAnimation: SKAction!
+    var slimeDyingAnimation: SKAction!
+    var eagleAnimation: SKAction!
+    
+    //last obstacle that was used
+    var lastMovementObstacle: SKSpriteNode!
+    
+    //settings
+    var settingsViewController: UIViewController!
+    
+    func createAnimation(imagesCount: Int, imageBaseName: String, frameRate: Double) -> SKAction {
+        var textures: [SKTexture] = []
+        for i in 1...imagesCount {
+            let texture = SKTexture(imageNamed: "\(imageBaseName)\(i)")
+            texture.filteringMode = .nearest
+            textures.append(texture)
+        }
+        return SKAction.animate(with: textures, timePerFrame: frameRate)
+    }
+    
+    func loadTextures() {
+        slimeIdleAnimation = createAnimation(
+            imagesCount: 2,
+            imageBaseName: "slimeidle",
+            frameRate: 0.2
+        )
+        dinoRunningAnimation = createAnimation(
+            imagesCount: 6,
+            imageBaseName: "dinoRunning",
+            frameRate: 0.1
+        )
+        bendedDinoAnimation = createAnimation(
+            imagesCount: 6,
+            imageBaseName: "bendedDino",
+            frameRate: 0.1
+        )
+        slimeDyingAnimation = createAnimation(
+            imagesCount: 13,
+            imageBaseName: "slimeDying",
+            frameRate: 0.1
+        )
+        eagleAnimation = createAnimation(
+            imagesCount: 6,
+            imageBaseName: "eagle",
+            frameRate: 0.1
+        )
+    }
     
     override func didMove(to view: SKView) {
         viewModel = GameSceneViewModel()
+        
+        settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsViewController")
+        
+        loadTextures()
         
         self.addChild(self.scoreLabel)
         
@@ -41,29 +100,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         slimeNode = obstacleSlime.childNode(withName: "slime") as? SKSpriteNode
         playButton = childNode(withName: "playButton") as? SKSpriteNode
         optionsButton = childNode(withName: "optionsButton") as? SKSpriteNode
+        eagleNode = childNode(withName: "obstacleEagle") as? SKSpriteNode
         
         obstacleSlime.physicsBody?.restitution = 2
         
-        var slimeIdleTextures: [SKTexture] = []
-        for i in 1...2 {
-            let slimeIdleTexture = SKTexture(imageNamed: "slimeidle\(i)")
-            slimeIdleTexture.filteringMode = .nearest
-            slimeIdleTextures.append(slimeIdleTexture)
-        }
-        let slimeIdleAnimation = SKAction.animate(with: slimeIdleTextures, timePerFrame: 0.2)
+        eagleNode.run(SKAction.repeatForever(eagleAnimation))
+        
         slimeNode.run(SKAction.repeatForever(slimeIdleAnimation))
         
         dinoNode.texture?.filteringMode = .nearest
         dinoNode.physicsBody?.mass = 100
         dinoNode.physicsBody?.restitution = -1
-        var dinoTextures: [SKTexture] = []
-        for i in 1...6 {
-            let dinoTexture = SKTexture(imageNamed: "dinoRunning\(i)")
-            dinoTexture.filteringMode = .nearest
-            dinoTextures.append(dinoTexture)
-        }
-        let dinoAnimation = SKAction.animate(with: dinoTextures, timePerFrame: 0.1)
-        dinoNode.run(SKAction.repeatForever(dinoAnimation))
+        
+        dinoNode.run(SKAction.repeatForever(dinoRunningAnimation))
         
         playButton.physicsBody?.mass = 30
         optionsButton.physicsBody?.mass = 30
@@ -102,51 +151,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if dinoNode.position.y < -95 {
-            dinoNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
+        guard let touchLocation = touches.first?.location(in: self) else { return }
+        
+        if touchLocation.x <= 0 {
+            print("Touched left side")
+            dinoNode.removeAllActions()
+            dinoNode.run(SKAction.repeatForever(bendedDinoAnimation))
+            isDinoBounded = true
+        } else {
+            if dinoNode.position.y < -95 {
+                print("Touched right side")
+                dinoNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
+            }
         }
         
-        guard let touch = touches.first?.location(in: self) else { return }
-        
-        if playButton.contains(touch) {
+        guard self.scene!.contains(playButton) else { return }
+        if playButton.contains(touchLocation) {
             startGame()
-        } else if optionsButton.contains(touch) {
-            print("settings")
-//            self.view.pre
+        } else if optionsButton.contains(touchLocation) {
+            let rootVC = self.view?.window?.rootViewController
+            rootVC?.present(settingsViewController, animated: true)
         }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard isDinoBounded else { return }
+        isDinoBounded = false
+        dinoNode.removeAllActions()
+        dinoNode.run(SKAction.repeatForever(dinoRunningAnimation))
     }
     
     // MARK: Start Game
     
     private func startGame() {
-        playButton.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
-        optionsButton.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
-        
-        DispatchQueue.global(qos: .background).async {
-            sleep(1)
-            self.removeChildren(in: [self.playButton, self.optionsButton])
+            
+            self.scene?.removeChildren(in: [self.optionsButton, self.playButton])
             self.isGamePaused = false
-        }
+        
     }
     
     // MARK: Contact logic
     
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.contactTestBitMask == 2 && contact.bodyB.contactTestBitMask == 1 {
-            var slimeDyingTextures = [SKTexture]()
-            
-            for i in 1...13 {
-                let texture = SKTexture(imageNamed: "slimeDying\(i)")
-                texture.filteringMode = .nearest
-                slimeDyingTextures.append(texture)
-            }
-            
-            let slimeDyingAnimation = SKAction.animate(with: slimeDyingTextures, timePerFrame: 0.1)
-            
             slimeNode.run(slimeDyingAnimation)
         }
         
         guard contact.bodyA.contactTestBitMask == contact.bodyB.contactTestBitMask else { return }
+        if contact.bodyA.node!.name == "obstacleEagle" || contact.bodyB.node!.name == "obstacleEagle" {
+            if isDinoBounded {
+                return
+            } else {
+                showMainMenu()
+                return
+            }
+        }
+        
         showMainMenu()
     }
     
@@ -161,8 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         referenceTime = 0
         
         playButton.position = CGPoint(x: 0, y: self.scene!.frame.height)
-        optionsButton.position = CGPoint(x: 0, y: self.scene!.frame.height/2)
-        
+        optionsButton.position = CGPoint(x: 0, y: self.scene!.frame.height/2+50)
         
         if !self.children.contains(playButton) && !self.children.contains(optionsButton) {
             self.addChild(playButton)
@@ -171,17 +230,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // MARK: Move Obstacles
-    
-    var lastMovementObstacle: SKSpriteNode!
-    
+        
     func moveObstacles() {
         if lastMovementObstacle == nil {
             lastMovementObstacle = obstacles.randomElement()!!
-        }else if lastMovementObstacle.position.x <= -(scene?.frame.width)!/1.5 {
+        } else if lastMovementObstacle.position.x <= -(scene?.frame.width)!/1.5 {
             lastMovementObstacle.position.x = scene!.frame.width/1.5
             lastMovementObstacle = obstacles.randomElement()!!
         }
         
+        guard lastMovementObstacle.name != "obstacleEagle" else {
+            lastMovementObstacle.position.x -= viewModel.movementSpeed + 3
+            return
+        }
         lastMovementObstacle.position.x -= viewModel.movementSpeed
     }
     
@@ -207,7 +268,7 @@ extension GameScene {
                 nodeName: "BackgroundLayer7",
                 imageName: "backgroundLayer7",
                 height: self.scene!.size.width/2.3,
-                zPosition: -8,
+                zPosition: -9,
                 yPosition: -60
             )
             
@@ -216,7 +277,7 @@ extension GameScene {
                 nodeName: "BackgroundLayer6",
                 imageName: "backgroundLayer6",
                 height: 170,
-                zPosition: -7,
+                zPosition: -8,
                 yPosition: -45
             )
             
@@ -225,7 +286,7 @@ extension GameScene {
                 nodeName: "LightsBackgroundLayer5",
                 imageName: "lightsBackgroundLayer5",
                 height: self.scene!.size.width/3,
-                zPosition: -6,
+                zPosition: -7,
                 yPosition: -(self.scene!.size.height)/100
             )
             
@@ -234,7 +295,7 @@ extension GameScene {
                 nodeName: "BackgroundLayer4",
                 imageName: "backgroundLayer4",
                 height: 170,
-                zPosition: -5,
+                zPosition: -6,
                 yPosition: -45
             )
             
@@ -243,7 +304,7 @@ extension GameScene {
                 nodeName: "BackgroundLayer3",
                 imageName: "backgroundLayer3",
                 height: 170,
-                zPosition: -4,
+                zPosition: -5,
                 yPosition: -45
             )
             
@@ -252,7 +313,7 @@ extension GameScene {
                 nodeName: "LightsBackgroundLayer2",
                 imageName: "lightsBackgroundLayer2",
                 height: self.scene!.size.width/3,
-                zPosition: -3,
+                zPosition: -4,
                 yPosition: -(self.scene?.size.height)!/100
             )
             
@@ -261,7 +322,7 @@ extension GameScene {
                 nodeName: "BackgroundLayer1",
                 imageName: "backgroundLayer1",
                 height: 315,
-                zPosition: -2,
+                zPosition: -3,
                 yPosition: 35
             )
             

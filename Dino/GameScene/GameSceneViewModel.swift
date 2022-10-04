@@ -18,7 +18,7 @@ class GameSceneViewModel: GameSceneViewModelProtocol {
     var movementSpeed: CGFloat = 3
     
     lazy var environments = [
-        MoveEnvironment(name: "BackgroundLayer7", shift: movementSpeed * (9 / 10)),
+        MoveEnvironment(name: "BackgroundLayer7", shift: movementSpeed * (9 / 20)),
         MoveEnvironment(name: "BackgroundLayer6", shift: movementSpeed * (11 / 20)),
         MoveEnvironment(name: "LightsBackgroundLayer5", shift: movementSpeed * (13 / 20)),
         MoveEnvironment(name: "BackgroundLayer4", shift: movementSpeed * (7 / 10)),
@@ -26,6 +26,6 @@ class GameSceneViewModel: GameSceneViewModelProtocol {
         MoveEnvironment(name: "LightsBackgroundLayer2", shift: movementSpeed * (17 / 20)),
         MoveEnvironment(name: "BackgroundLayer1", shift: movementSpeed * (9 / 10)),
         MoveEnvironment(name: "Ground", shift: movementSpeed),
-        MoveEnvironment(name: "ForegroundGround", shift: movementSpeed * (23 / 20)),
+        MoveEnvironment(name: "ForegroundGround", shift: movementSpeed * (23 / 20))
     ]
 }
