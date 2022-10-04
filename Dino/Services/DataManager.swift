@@ -18,4 +18,12 @@ class DataManager {
     func fetchScore() -> Int? {
         UserDefaults.standard.integer(forKey: "bestScore")
     }
+    
+    func saveMusicState(state: Bool) {
+        UserDefaults.standard.set(state, forKey: "musicState")
+    }
+    
+    func fetchMusicState() -> Bool? {
+        UserDefaults.standard.bool(forKey: "musicState")
+    }
 }

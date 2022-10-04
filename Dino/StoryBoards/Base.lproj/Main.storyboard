@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-43" y="-28"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="ncf-k9-rMp">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="7Hm-Jh-LKg" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="7Hm-Jh-LKg" customClass="SettingsViewController" customModule="Dino" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yJ6-N1-D9D">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,39 +41,59 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-ki-FVV">
-                                <rect key="frame" x="122.00000000000001" y="135" width="146.33333333333337" height="31"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-ki-FVV">
+                                <rect key="frame" x="133.33333333333334" y="135" width="123.33333333333334" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PZ-sv-rTG">
-                                        <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="35"/>
                                         <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ncp-HT-Waf">
-                                        <rect key="frame" x="97.333333333333343" y="0.0" width="51" height="31"/>
-                                    </switch>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4m-hb-IHN">
+                                        <rect key="frame" x="81.333333333333314" y="0.0" width="42" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="DwK-AE-dch"/>
+                                            <constraint firstAttribute="width" secondItem="r4m-hb-IHN" secondAttribute="height" multiplier="81:67" id="s3H-ah-QAc"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="mark">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="musicButtonAction:" destination="7Hm-Jh-LKg" eventType="touchUpInside" id="Unn-NE-A0m"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0e-35-Io1">
-                                <rect key="frame" x="152.33333333333334" y="791" width="85.333333333333343" height="37"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Done" titleAlignment="center">
-                                    <fontDescription key="titleFontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="23"/>
-                                </buttonConfiguration>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGi-EH-G7V">
+                                <rect key="frame" x="121.33333333333333" y="753" width="147.33333333333337" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LGi-EH-G7V" secondAttribute="height" multiplier="251:128" id="C5e-Ev-iJl"/>
+                                    <constraint firstAttribute="height" constant="75" id="zeI-IH-bVA"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="" image="DoneButtonNormal"/>
+                                <connections>
+                                    <action selector="action:" destination="7Hm-Jh-LKg" eventType="touchUpInside" id="PXE-2h-dgY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oln-Qd-xPd"/>
                         <color key="backgroundColor" white="0.0" alpha="0.70370899086378735" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="LGi-EH-G7V" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="1uN-CH-mqq"/>
                             <constraint firstItem="6yq-ki-FVV" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="QZX-Y9-orb"/>
                             <constraint firstItem="Gja-Mm-WOF" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="XbQ-jg-JOO"/>
+                            <constraint firstAttribute="bottom" secondItem="LGi-EH-G7V" secondAttribute="bottom" constant="16" id="a2X-wq-729"/>
                             <constraint firstItem="Gja-Mm-WOF" firstAttribute="top" secondItem="Oln-Qd-xPd" secondAttribute="top" constant="16" id="eQO-ce-ith"/>
-                            <constraint firstItem="Y0e-35-Io1" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="lT1-pG-Atm"/>
-                            <constraint firstAttribute="bottom" secondItem="Y0e-35-Io1" secondAttribute="bottom" constant="16" id="sKX-cz-wcX"/>
                             <constraint firstItem="6yq-ki-FVV" firstAttribute="top" secondItem="Gja-Mm-WOF" secondAttribute="bottom" constant="32" id="uLX-vT-bFt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="doneButton" destination="LGi-EH-G7V" id="7qk-TT-cSJ"/>
+                        <outlet property="musicButton" destination="r4m-hb-IHN" id="Hqy-XA-cF2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNg-71-RYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,6 +101,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="DoneButtonNormal" width="227" height="114"/>
+        <image name="mark" width="82" height="67"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

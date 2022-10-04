@@ -25,6 +25,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playButton: SKSpriteNode!
     var optionsButton: SKSpriteNode!
     var eagleNode: SKSpriteNode!
+    
+    //music
+    var music: SKAudioNode!
 
     // score
     var scoreLabel = SKLabelNode(text: "0")
@@ -93,6 +96,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loadTextures()
         
         self.addChild(self.scoreLabel)
+        
+        music = childNode(withName: "music") as? SKAudioNode
+        
+        let sound = SKAction.playSoundFileNamed("Gaming.mp3", waitForCompletion: false)
+        
+        music.run(SKAction.repeatForever(sound))
         
         obstacleStone = childNode(withName: "obstacleStone") as? SKSpriteNode
         dinoNode = childNode(withName: "dino") as? SKSpriteNode
