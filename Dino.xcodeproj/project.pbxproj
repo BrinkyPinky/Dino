@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		158D210E32EDBB6B806DA1E2 /* Pods_Dino.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE8AE02973D213E4C76CEA04 /* Pods_Dino.framework */; };
 		E213014E28E997430071EC65 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213014D28E997430071EC65 /* DataManager.swift */; };
 		E22C3A0828EC474B008F8225 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C3A0728EC474B008F8225 /* SettingsViewController.swift */; };
-		E28E749328ECAF2300852842 /* Gaming.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E28E749228ECAF2300852842 /* Gaming.mp3 */; };
-		E28E749528ECAFEE00852842 /* Music500.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E28E749428ECAFEE00852842 /* Music500.mp3 */; };
+		E294DCAE28ECB93900C2D82C /* Gaming.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E294DCAC28ECB93800C2D82C /* Gaming.mp3 */; };
+		E294DCAF28ECB93900C2D82C /* Music500.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E294DCAD28ECB93900C2D82C /* Music500.mp3 */; };
 		E2B75E9628E5DC1B008A865D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B75E9528E5DC1B008A865D /* AppDelegate.swift */; };
 		E2B75E9828E5DC1B008A865D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B75E9728E5DC1B008A865D /* GameScene.sks */; };
 		E2B75E9A28E5DC1B008A865D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2B75E9928E5DC1B008A865D /* Actions.sks */; };
@@ -24,12 +25,27 @@
 		E2BF77D728E81D5700802A78 /* Toriko.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2BF77D628E81D5700802A78 /* Toriko.ttf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E28FEC5F28EDA30100F42051 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		06762074545910E551E15BBF /* Pods-Dino.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dino.debug.xcconfig"; path = "Target Support Files/Pods-Dino/Pods-Dino.debug.xcconfig"; sourceTree = "<group>"; };
+		8BE5DFED855231BF363ED25A /* Pods-Dino.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dino.release.xcconfig"; path = "Target Support Files/Pods-Dino/Pods-Dino.release.xcconfig"; sourceTree = "<group>"; };
 		E213014D28E997430071EC65 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E22C3A0728EC474B008F8225 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E236D11728E81FAA0043DA71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E28E749228ECAF2300852842 /* Gaming.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Gaming.mp3; sourceTree = "<group>"; };
-		E28E749428ECAFEE00852842 /* Music500.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Music500.mp3; sourceTree = "<group>"; };
+		E294DCAC28ECB93800C2D82C /* Gaming.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Gaming.mp3; sourceTree = "<group>"; };
+		E294DCAD28ECB93900C2D82C /* Music500.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Music500.mp3; sourceTree = "<group>"; };
 		E2B75E9228E5DC1B008A865D /* Dino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B75E9528E5DC1B008A865D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2B75E9728E5DC1B008A865D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -42,6 +58,7 @@
 		E2BF77D028E8131500802A78 /* GameSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewModel.swift; sourceTree = "<group>"; };
 		E2BF77D228E8149B00802A78 /* MoveEnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveEnvironmentModel.swift; sourceTree = "<group>"; };
 		E2BF77D628E81D5700802A78 /* Toriko.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Toriko.ttf; sourceTree = "<group>"; };
+		FE8AE02973D213E4C76CEA04 /* Pods_Dino.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dino.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				158D210E32EDBB6B806DA1E2 /* Pods_Dino.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +76,18 @@
 		1535D572A49A39D8061C4619 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				06762074545910E551E15BBF /* Pods-Dino.debug.xcconfig */,
+				8BE5DFED855231BF363ED25A /* Pods-Dino.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		72FD2565689568F2E9001160 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE8AE02973D213E4C76CEA04 /* Pods_Dino.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E213014C28E997110071EC65 /* Services */ = {
@@ -135,8 +163,8 @@
 		E28E749128ECAF0E00852842 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				E28E749228ECAF2300852842 /* Gaming.mp3 */,
-				E28E749428ECAFEE00852842 /* Music500.mp3 */,
+				E294DCAC28ECB93800C2D82C /* Gaming.mp3 */,
+				E294DCAD28ECB93900C2D82C /* Music500.mp3 */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -147,6 +175,7 @@
 				E2B75E9428E5DC1B008A865D /* Dino */,
 				E2B75E9328E5DC1B008A865D /* Products */,
 				1535D572A49A39D8061C4619 /* Pods */,
+				72FD2565689568F2E9001160 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,9 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2B75EA928E5DC1D008A865D /* Build configuration list for PBXNativeTarget "Dino" */;
 			buildPhases = (
+				C1C9266B2BBD9249FD35B4FE /* [CP] Check Pods Manifest.lock */,
 				E2B75E8E28E5DC1B008A865D /* Sources */,
 				E2B75E8F28E5DC1B008A865D /* Frameworks */,
 				E2B75E9028E5DC1B008A865D /* Resources */,
+				E28FEC5F28EDA30100F42051 /* Embed Frameworks */,
+				0266C9D9D88295535C4C184E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,10 +264,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28E749528ECAFEE00852842 /* Music500.mp3 in Resources */,
+				E294DCAF28ECB93900C2D82C /* Music500.mp3 in Resources */,
 				E2BF77D728E81D5700802A78 /* Toriko.ttf in Resources */,
 				E2B75EA128E5DC1B008A865D /* Main.storyboard in Resources */,
-				E28E749328ECAF2300852842 /* Gaming.mp3 in Resources */,
+				E294DCAE28ECB93900C2D82C /* Gaming.mp3 in Resources */,
 				E2B75E9828E5DC1B008A865D /* GameScene.sks in Resources */,
 				E2B75EA328E5DC1D008A865D /* Assets.xcassets in Resources */,
 				E2B75EA628E5DC1D008A865D /* LaunchScreen.storyboard in Resources */,
@@ -244,6 +276,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0266C9D9D88295535C4C184E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dino/Pods-Dino-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dino/Pods-Dino-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dino/Pods-Dino-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1C9266B2BBD9249FD35B4FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dino-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E2B75E8E28E5DC1B008A865D /* Sources */ = {
@@ -335,12 +409,13 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -392,7 +467,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -404,6 +479,7 @@
 		};
 		E2B75EAA28E5DC1D008A865D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06762074545910E551E15BBF /* Pods-Dino.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -418,7 +494,6 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,6 +509,7 @@
 		};
 		E2B75EAB28E5DC1D008A865D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BE5DFED855231BF363ED25A /* Pods-Dino.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -448,7 +524,6 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

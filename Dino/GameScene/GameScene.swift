@@ -7,6 +7,8 @@
 
 import SpriteKit
 import GameplayKit
+import RxSwift
+import RxCocoa
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -15,27 +17,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // game status
     var isGamePaused = true
-    var isDinoBounded = false
+    var isDinoBended = false
     
     // nodes
     var dinoNode: SKSpriteNode!
     var slimeNode: SKSpriteNode!
-    var obstacleSlime: SKSpriteNode!
-    var obstacleStone: SKSpriteNode!
-    var playButton: SKSpriteNode!
-    var optionsButton: SKSpriteNode!
-    var eagleNode: SKSpriteNode!
+    var playButtonNode: SKSpriteNode!
+    var optionsButtonNode: SKSpriteNode!
     
+    //obstacles
+    var obstacleEagleNode: SKSpriteNode!
+    var obstacleStoneNode: SKSpriteNode!
+    var obstacleSlimeNode: SKSpriteNode!
+
     //music
     var music: SKAudioNode!
 
     // score
     var scoreLabel = SKLabelNode(text: "0")
-    var score: Int = 0
     var referenceTime: Double = 0
+    var score: Int = 0 {
+        didSet  {
+            guard score != oldValue, score != 0 else { return }
+            guard score % 100 == 0 else { return }
+            guard viewModel.movementSpeed < 6 else { return }
+            viewModel.movementSpeed += 0.2
+            DispatchQueue.global(qos: .background).async {
+                for _ in 1...4 {
+                    self.scoreLabel.alpha = 0
+                    Thread.sleep(forTimeInterval: 0.4)
+                    self.scoreLabel.alpha = 1
+                    Thread.sleep(forTimeInterval: 0.4)
+                }
+            }
+        }
+    }
     
     // obstacles array
-    lazy var obstacles = [obstacleSlime, obstacleStone, eagleNode]
+    lazy var obstacles = [obstacleSlimeNode, obstacleStoneNode, obstacleEagleNode]
     
     // texture actions
     var slimeIdleAnimation: SKAction!
@@ -79,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         slimeDyingAnimation = createAnimation(
             imagesCount: 13,
             imageBaseName: "slimeDying",
-            frameRate: 0.1
+            frameRate: 0.05
         )
         eagleAnimation = createAnimation(
             imagesCount: 6,
@@ -98,22 +117,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.scoreLabel)
         
         music = childNode(withName: "music") as? SKAudioNode
+        let sound = SKAction.playSoundFileNamed("Music500.mp3", waitForCompletion: false)
+        music.run(sound)
+        music.autoplayLooped = true
         
-        let sound = SKAction.playSoundFileNamed("Gaming.mp3", waitForCompletion: false)
-        
-        music.run(SKAction.repeatForever(sound))
-        
-        obstacleStone = childNode(withName: "obstacleStone") as? SKSpriteNode
+        obstacleStoneNode = childNode(withName: "obstacleStone") as? SKSpriteNode
         dinoNode = childNode(withName: "dino") as? SKSpriteNode
-        obstacleSlime = childNode(withName: "obstacleSlime") as? SKSpriteNode
-        slimeNode = obstacleSlime.childNode(withName: "slime") as? SKSpriteNode
-        playButton = childNode(withName: "playButton") as? SKSpriteNode
-        optionsButton = childNode(withName: "optionsButton") as? SKSpriteNode
-        eagleNode = childNode(withName: "obstacleEagle") as? SKSpriteNode
+        obstacleSlimeNode = childNode(withName: "obstacleSlime") as? SKSpriteNode
+        slimeNode = obstacleSlimeNode.childNode(withName: "slime") as? SKSpriteNode
+        playButtonNode = childNode(withName: "playButton") as? SKSpriteNode
+        optionsButtonNode = childNode(withName: "optionsButton") as? SKSpriteNode
+        obstacleEagleNode = childNode(withName: "obstacleEagle") as? SKSpriteNode
         
-        obstacleSlime.physicsBody?.restitution = 2
+        obstacleSlimeNode.physicsBody?.restitution = 2
         
-        eagleNode.run(SKAction.repeatForever(eagleAnimation))
+        obstacleEagleNode.run(SKAction.repeatForever(eagleAnimation))
         
         slimeNode.run(SKAction.repeatForever(slimeIdleAnimation))
         
@@ -123,14 +141,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         dinoNode.run(SKAction.repeatForever(dinoRunningAnimation))
         
-        playButton.physicsBody?.mass = 30
-        optionsButton.physicsBody?.mass = 30
+        playButtonNode.physicsBody?.mass = 30
+        optionsButtonNode.physicsBody?.mass = 30
         
         scoreLabel.fontName = "Toriko"
         scoreLabel.position.y = 100
         
-        playButton.texture?.filteringMode = .nearest
-        optionsButton.texture?.filteringMode = .nearest
+        playButtonNode.texture?.filteringMode = .nearest
+        optionsButtonNode.texture?.filteringMode = .nearest
         
         self.physicsWorld.contactDelegate = self
         
@@ -138,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         createEnvironment()
     }
-    
+        
     override func update(_ currentTime: TimeInterval) {
         moveEnvironment()
         self.dinoNode.position.x = -(self.scene?.frame.width)!/3
@@ -166,7 +184,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("Touched left side")
             dinoNode.removeAllActions()
             dinoNode.run(SKAction.repeatForever(bendedDinoAnimation))
-            isDinoBounded = true
+            isDinoBended = true
         } else {
             if dinoNode.position.y < -95 {
                 print("Touched right side")
@@ -174,18 +192,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        guard self.scene!.contains(playButton) else { return }
-        if playButton.contains(touchLocation) {
+        guard self.scene!.contains(playButtonNode) else { return }
+        if playButtonNode.contains(touchLocation) {
             startGame()
-        } else if optionsButton.contains(touchLocation) {
+        } else if optionsButtonNode.contains(touchLocation) {
             let rootVC = self.view?.window?.rootViewController
             rootVC?.present(settingsViewController, animated: true)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard isDinoBounded else { return }
-        isDinoBounded = false
+        guard isDinoBended else { return }
+        isDinoBended = false
         dinoNode.removeAllActions()
         dinoNode.run(SKAction.repeatForever(dinoRunningAnimation))
     }
@@ -194,7 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func startGame() {
             
-            self.scene?.removeChildren(in: [self.optionsButton, self.playButton])
+            self.scene?.removeChildren(in: [self.optionsButtonNode, self.playButtonNode])
             self.isGamePaused = false
         
     }
@@ -208,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         guard contact.bodyA.contactTestBitMask == contact.bodyB.contactTestBitMask else { return }
         if contact.bodyA.node!.name == "obstacleEagle" || contact.bodyB.node!.name == "obstacleEagle" {
-            if isDinoBounded {
+            if isDinoBended {
                 return
             } else {
                 showMainMenu()
@@ -229,13 +247,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         referenceTime = 0
         
-        playButton.position = CGPoint(x: 0, y: self.scene!.frame.height)
-        optionsButton.position = CGPoint(x: 0, y: self.scene!.frame.height/2+50)
+        playButtonNode.position = CGPoint(x: 0, y: self.scene!.frame.height)
+        optionsButtonNode.position = CGPoint(x: 0, y: self.scene!.frame.height/2+50)
         
-        if !self.children.contains(playButton) && !self.children.contains(optionsButton) {
-            self.addChild(playButton)
-            self.addChild(optionsButton)
+        if !self.children.contains(playButtonNode) && !self.children.contains(optionsButtonNode) {
+            self.addChild(playButtonNode)
+            self.addChild(optionsButtonNode)
         }
+        
+        viewModel.movementSpeed = 3
     }
     
     // MARK: Move Obstacles
