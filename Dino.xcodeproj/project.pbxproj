@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E213014E28E997430071EC65 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213014D28E997430071EC65 /* DataManager.swift */; };
+		E21F275F28EED29B005A89F9 /* JumpSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = E21F275E28EED29B005A89F9 /* JumpSound.wav */; };
+		E21F276128EED558005A89F9 /* bendSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = E21F276028EED558005A89F9 /* bendSound.wav */; };
 		E22AB4A328EE0DD3003C47B5 /* slimeDying.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E22AB4A228EE0DD3003C47B5 /* slimeDying.mp3 */; };
 		E22AB4A528EE11FF003C47B5 /* dinoFootsteps.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E22AB4A428EE11FF003C47B5 /* dinoFootsteps.mp3 */; };
 		E22C3A0828EC474B008F8225 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22C3A0728EC474B008F8225 /* SettingsViewController.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		E213014D28E997430071EC65 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		E21F275E28EED29B005A89F9 /* JumpSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = JumpSound.wav; sourceTree = "<group>"; };
+		E21F276028EED558005A89F9 /* bendSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bendSound.wav; sourceTree = "<group>"; };
 		E22AB4A228EE0DD3003C47B5 /* slimeDying.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slimeDying.mp3; sourceTree = "<group>"; };
 		E22AB4A428EE11FF003C47B5 /* dinoFootsteps.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dinoFootsteps.mp3; sourceTree = "<group>"; };
 		E22C3A0728EC474B008F8225 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -157,8 +161,10 @@
 			children = (
 				E294DCAC28ECB93800C2D82C /* Gaming.mp3 */,
 				E294DCAD28ECB93900C2D82C /* Music500.mp3 */,
+				E21F275E28EED29B005A89F9 /* JumpSound.wav */,
 				E22AB4A428EE11FF003C47B5 /* dinoFootsteps.mp3 */,
 				E22AB4A228EE0DD3003C47B5 /* slimeDying.mp3 */,
+				E21F276028EED558005A89F9 /* bendSound.wav */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -263,8 +269,10 @@
 				E2B75E9828E5DC1B008A865D /* GameScene.sks in Resources */,
 				E22AB4A528EE11FF003C47B5 /* dinoFootsteps.mp3 in Resources */,
 				E2B75EA328E5DC1D008A865D /* Assets.xcassets in Resources */,
+				E21F275F28EED29B005A89F9 /* JumpSound.wav in Resources */,
 				E2B75EA628E5DC1D008A865D /* LaunchScreen.storyboard in Resources */,
 				E2B75E9A28E5DC1B008A865D /* Actions.sks in Resources */,
+				E21F276128EED558005A89F9 /* bendSound.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

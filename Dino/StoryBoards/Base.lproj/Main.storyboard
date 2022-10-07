@@ -41,8 +41,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-ki-FVV">
-                                <rect key="frame" x="133.33333333333334" y="135" width="123.33333333333334" height="35"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="98" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-ki-FVV">
+                                <rect key="frame" x="92.333333333333329" y="135" width="205.33333333333337" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PZ-sv-rTG">
                                         <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="35"/>
@@ -51,7 +51,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4m-hb-IHN">
-                                        <rect key="frame" x="81.333333333333314" y="0.0" width="42" height="35"/>
+                                        <rect key="frame" x="163.33333333333331" y="0.0" width="42" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="DwK-AE-dch"/>
                                             <constraint firstAttribute="width" secondItem="r4m-hb-IHN" secondAttribute="height" multiplier="81:67" id="s3H-ah-QAc"/>
@@ -78,12 +78,39 @@
                                     <action selector="action:" destination="7Hm-Jh-LKg" eventType="touchUpInside" id="PXE-2h-dgY"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lw3-TA-yds">
+                                <rect key="frame" x="91.999999999999986" y="186" width="205.66666666666663" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Effects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RH2-zy-isJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="35"/>
+                                        <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="22"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fe9-G7-Qt6">
+                                        <rect key="frame" x="163.66666666666666" y="0.0" width="42" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="OPt-RL-mGZ"/>
+                                            <constraint firstAttribute="width" secondItem="Fe9-G7-Qt6" secondAttribute="height" multiplier="81:67" id="xUl-1s-VjL"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="mark">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="soundEffectsButtonAction:" destination="7Hm-Jh-LKg" eventType="touchUpInside" id="6Yo-A6-psr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oln-Qd-xPd"/>
                         <color key="backgroundColor" white="0.0" alpha="0.70370899086378735" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="lw3-TA-yds" firstAttribute="trailing" secondItem="6yq-ki-FVV" secondAttribute="trailing" id="1hn-Qr-nmG"/>
                             <constraint firstItem="LGi-EH-G7V" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="1uN-CH-mqq"/>
                             <constraint firstItem="6yq-ki-FVV" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="QZX-Y9-orb"/>
+                            <constraint firstItem="lw3-TA-yds" firstAttribute="top" secondItem="6yq-ki-FVV" secondAttribute="bottom" constant="16" id="UMU-LE-5QM"/>
                             <constraint firstItem="Gja-Mm-WOF" firstAttribute="centerX" secondItem="yJ6-N1-D9D" secondAttribute="centerX" id="XbQ-jg-JOO"/>
                             <constraint firstAttribute="bottom" secondItem="LGi-EH-G7V" secondAttribute="bottom" constant="16" id="a2X-wq-729"/>
                             <constraint firstItem="Gja-Mm-WOF" firstAttribute="top" secondItem="Oln-Qd-xPd" secondAttribute="top" constant="16" id="eQO-ce-ith"/>
@@ -93,6 +120,7 @@
                     <connections>
                         <outlet property="doneButton" destination="LGi-EH-G7V" id="7qk-TT-cSJ"/>
                         <outlet property="musicButton" destination="r4m-hb-IHN" id="Hqy-XA-cF2"/>
+                        <outlet property="soundEffectsButton" destination="Fe9-G7-Qt6" id="ZIz-PN-uBt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNg-71-RYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

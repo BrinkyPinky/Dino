@@ -21,12 +21,7 @@ extension GameScene {
         scoreLabel.position.y = 100
         
         obstacleStoneNode = childNode(withName: "obstacleStone") as? SKSpriteNode
-        
-        let url = URL(fileReferenceLiteralResourceName: "Music500.mp3")
-        music = try! AVAudioPlayer(contentsOf: url)
-        music.numberOfLoops = 999
-        music.play()
-        
+                
         dinoNode = childNode(withName: "dino") as? SKSpriteNode
         dinoNode.physicsBody?.mass = 100
         dinoNode.physicsBody?.restitution = 0
@@ -51,6 +46,33 @@ extension GameScene {
         optionsButtonNode.texture?.filteringMode = .nearest
         
         self.physicsWorld.contactDelegate = self
+    }
+    
+    // MARK: Music And Effects setup
+    func musicSetup(musicState: Bool) {
+        if musicState {
+            let url = URL(fileReferenceLiteralResourceName: "Music500.mp3")
+            music = try! AVAudioPlayer(contentsOf: url)
+            music!.numberOfLoops = .max
+            music!.play()
+        } else {
+            music = nil
+        }
+    }
+    
+    func soundEffectsSetup(soundEffectsState: Bool) {
+        if soundEffectsState {
+            let dinoFootstepsURL = URL(fileReferenceLiteralResourceName: "dinoFootsteps.mp3")
+            dinoRunningSoundEffect = try! AVAudioPlayer(contentsOf: dinoFootstepsURL)
+            dinoRunningSoundEffect!.numberOfLoops = .max
+            dinoRunningSoundEffect!.volume = 0.1
+            dinoRunningSoundEffect!.play()
+            
+            soundEffects = childNode(withName: "soundEffects") as? SKAudioNode
+        } else {
+            dinoRunningSoundEffect = nil
+            soundEffects = nil
+        }
     }
     
     // MARK: Animations

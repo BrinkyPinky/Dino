@@ -26,4 +26,12 @@ class DataManager {
     func fetchMusicState() -> Bool? {
         UserDefaults.standard.bool(forKey: "musicState")
     }
+    
+    func saveSoundEffectsState(state: Bool) {
+        UserDefaults.standard.set(state, forKey: "soundEffectsState")
+    }
+    
+    func fetchSoundEffectsState() -> Bool? {
+        UserDefaults.standard.bool(forKey: "soundEffectsState")
+    }
 }

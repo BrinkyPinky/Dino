@@ -9,7 +9,12 @@ import SpriteKit
 import GameplayKit
 import MediaPlayer
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+protocol GameSceneDelegate: AnyObject {
+    func musicSetup(musicState: Bool)
+    func soundEffectsSetup(soundEffectsState: Bool)
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
     
     // view model
     var viewModel: GameSceneViewModelProtocol!
@@ -27,7 +32,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     lazy var obstacles = [obstacleSlimeNode, obstacleStoneNode, obstacleEagleNode]
     
     //music
-    var music: AVAudioPlayer!
+    var music: AVAudioPlayer?
+    var soundEffects: SKAudioNode?
+    var dinoRunningSoundEffect: AVAudioPlayer?
+    let slimeDyingSoundEffect = SKAction.playSoundFileNamed("slimeDying.mp3", waitForCompletion: true)
+    let jumpSound = SKAction.playSoundFileNamed("JumpSound.wav", waitForCompletion: true)
+    let bendSound = SKAction.playSoundFileNamed("bendSound.wav", waitForCompletion: true)
     
     // score
     var scoreLabel = SKLabelNode(text: "0")
@@ -45,12 +55,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //settings
     var settingsViewController: UIViewController!
     
+    func updateSoundEffects(state: Bool) {
+        updateSoundEffects(state: state)
+    }
+    
     override func didMove(to view: SKView) {
         viewModel = GameSceneViewModel(gameScene: self)
         loadTextures()
         setup()
         showMainMenu()
         createEnvironment()
+        musicSetup(musicState: DataManager.shared.fetchMusicState() ?? true)
+        soundEffectsSetup(soundEffectsState: DataManager.shared.fetchSoundEffectsState() ?? true)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -70,14 +86,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touchLocation = touches.first?.location(in: self) else { return }
-        
         guard self.scene!.contains(playButtonNode) else {
             if touchLocation.x <= 0 { // touched left side
                 dinoNode.removeAllActions()
                 dinoNode.run(SKAction.repeatForever(bendedDinoAnimation))
+                soundEffects?.run(bendSound)
                 viewModel.isDinoBended = true
-            } else {
-                if dinoNode.position.y < -95 { // touched right side
+            } else { // touched right side
+                if dinoNode.position.y < -95 {
+                    soundEffects?.run(jumpSound)
                     dinoNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50000))
                 }
             }
@@ -87,8 +104,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playButtonNode.contains(touchLocation) {
             startGame()
         } else if optionsButtonNode.contains(touchLocation) {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            guard let settingsViewController = storyBoard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else { return }
             let rootVC = self.view?.window?.rootViewController
             rootVC?.present(settingsViewController, animated: true)
+            settingsViewController.gameSceneDelegate = self
         }
     }
     
@@ -101,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: Start Game
     
-    private func startGame() {
+    func startGame() {
         self.scene?.removeChildren(in: [self.optionsButtonNode, self.playButtonNode])
         self.viewModel.isGamePaused = false
     }
@@ -111,6 +131,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.contactTestBitMask == 2 && contact.bodyB.contactTestBitMask == 1 {
             slimeNode.run(slimeDyingAnimation)
+            soundEffects?.run(slimeDyingSoundEffect)
+        }
+        
+        if contact.bodyA.node!.name == "physicalGround" || contact.bodyB.node!.name == "physicalGround" {
+            if contact.bodyA.node!.name == "dino" || contact.bodyB.node!.name == "dino" {
+                DispatchQueue.global(qos: .background).async {
+                    self.dinoRunningSoundEffect?.volume = 0.1
+                }
+            }
         }
         
         guard contact.bodyA.contactTestBitMask == contact.bodyB.contactTestBitMask else { return }
@@ -124,6 +153,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         showMainMenu()
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node!.name == "physicalGround" || contact.bodyB.node!.name == "physicalGround" {
+            if contact.bodyA.node!.name == "dino" || contact.bodyB.node!.name == "dino" {
+                self.dinoRunningSoundEffect?.volume = 0
+            }
+        }
     }
     
     // MARK: show Main Menu
