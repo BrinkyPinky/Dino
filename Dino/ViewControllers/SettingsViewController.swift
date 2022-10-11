@@ -32,7 +32,6 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         changeImage(button: musicButton, state: musicState)
         changeImage(button: soundEffectsButton, state: soundEffectsState)
 

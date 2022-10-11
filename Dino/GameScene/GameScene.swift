@@ -55,10 +55,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
     //settings
     var settingsViewController: UIViewController!
     
-    func updateSoundEffects(state: Bool) {
-        updateSoundEffects(state: state)
-    }
-    
     override func didMove(to view: SKView) {
         viewModel = GameSceneViewModel(gameScene: self)
         loadTextures()
@@ -121,7 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
     
     // MARK: Start Game
     
-    func startGame() {
+    private func startGame() {
         self.scene?.removeChildren(in: [self.optionsButtonNode, self.playButtonNode])
         self.viewModel.isGamePaused = false
     }
@@ -186,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
     
     // MARK: Move Obstacles
     
-    func moveObstacles() {
+    private func moveObstacles() {
         if lastMovementObstacle == nil {
             lastMovementObstacle = obstacles.randomElement()!!
         } else if lastMovementObstacle.position.x <= -(scene?.frame.width)!/1.5 {
@@ -203,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
     
     // MARK: Move Environment
     
-    func moveEnvironment() {
+    private func moveEnvironment() {
         viewModel.environments.forEach { environment in
             enumerateChildNodes(withName: environment.name) { [unowned self] node, _ in
                 node.position.x -= environment.shift
